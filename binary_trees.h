@@ -40,6 +40,7 @@ int binary_tree_is_root(const binary_tree_t *node);
 void binary_tree_preorder(const binary_tree_t *tree, void (*func)(int));
 void binary_tree_inorder(const binary_tree_t *tree, void (*func)(int));
 void binary_tree_postorder(const binary_tree_t *tree, void (*func)(int));
+void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
 
 /* Tree Data */
 size_t binary_tree_height(const binary_tree_t *tree);
@@ -56,5 +57,8 @@ int binary_tree_is_perfect(const binary_tree_t *tree);
 /* Node Relationships */
 binary_tree_t *binary_tree_sibling(binary_tree_t *node);
 binary_tree_t *binary_tree_uncle(binary_tree_t *node);
+void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
+
+
 
 #endif /* _BINARY_TREES_H_ */
