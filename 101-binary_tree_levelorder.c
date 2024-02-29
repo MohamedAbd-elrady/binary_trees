@@ -1,42 +1,62 @@
 #include "binary_trees.h"
 
 /**
-  * binary_tree_height - returns the height of a binary tree
-  * @tree: Tree to measure
-  * Return: height of the tree
-  */
-size_t binary_tree_height(const binary_tree_t *tree)
+ * binary_tree_levelorder - go through binary tree using level-order traversal
+ * @tree: pointer to root of tree
+ * @func: function pointer to use while traversing
+ */
+void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
-	size_t right, left;
+	int height, counter;
 
-	if (!tree || (!tree->left && !tree->right))
-		return (0);
-	left = binary_tree_height(tree->left) + 1;
-	right = binary_tree_height(tree->right) + 1;
-	return (right > left ? right : left);
+	if (tree == NULL || func == NULL)
+		return;
+
+	height = custom_binary_tree_height(tree);
+	for (counter = 0; counter <= height; counter++)
+		levelordering(tree, func, counter);
 }
 
 /**
-  * binary_tree_levelorder - define function
-  * @tree: root node of the tree
-  * @func: function pointer to a function that accepts an integer
-  */
-void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
+ * levelordering - binary tree level ordering recursive helper function
+ * @tree: node of a tree, initially the root
+ * @func: function pointer to use at each level
+ * @height: height of tree from current node
+ */
+void levelordering(const binary_tree_t *tree, void (*func)(int), int height)
 {
-	binary_tree_t *temp;
-	int height, node_num, i, k;
-
-	if (!tree || !func)
+	if (tree == NULL)
 		return;
-	temp = (binary_tree_t *)tree;
-	height  = binary_tree_height(tree);
-	for (node_num = 1, k = 0; k <= height; k++, node_num *= 2)
-		;
-	node_num--;
-	printf("%d, %d\n", height, node_num);
-	for (i = 0; --height >= 0; i++)
+	else if (height == 0)
+		func(tree->n);
+	else
 	{
-
+		levelordering(tree->left, func, height - 1);
+		levelordering(tree->right, func, height - 1);
 	}
-	temp++;
+}
+
+/**
+ * custom_binary_tree_height - Measure height of a binary tree from given node
+ * @tree: pointer to node of tree to measure
+ * Description: Edited to work with balance factor function
+ * Return: height of tree or -1 if NULL
+ */
+int custom_binary_tree_height(const binary_tree_t *tree)
+{
+	int left, right;
+
+	if (tree == NULL)
+		return (-1);
+
+	if (tree->left == NULL && tree->right == NULL)
+		return (0);
+
+	left = custom_binary_tree_height(tree->left) + 1;
+	right = custom_binary_tree_height(tree->right) + 1;
+
+	if (left > right)
+		return (left);
+	else
+		return (right);
 }
