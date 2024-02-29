@@ -75,4 +75,12 @@ bst_t *array_to_bst(int *array, size_t size);
 bst_t *bst_search(const bst_t *tree, int value);
 bst_t *bst_remove(bst_t *root, int value);
 
+/* Helper Functions */
+int custom_binary_tree_height(const binary_tree_t *tree);
+void levelordering(const binary_tree_t *tree, void (*func)(int), int height);
+int bst_lesser(const binary_tree_t *node, int val);
+int bst_greater(const binary_tree_t *node, int val);
+bst_t *bst_insert_help(bst_t *node, int value);
+bst_t *bst_find_root(bst_t *node);
+
 #endif /* _BINARY_TREES_H_ */
