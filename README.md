@@ -1,1 +1,1 @@
-Binary Trees team project of month five in foundation period in alx scoholarship 
+Binary Trees team project of month five in foundation period in alx scoholarship
